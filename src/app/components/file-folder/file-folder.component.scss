@@ -1,0 +1,98 @@
+.node {
+    width: fit-content;
+    margin-right: 40px;
+    
+    .nodeType {
+        margin-top: 6px;
+        padding: 0 8px;
+    }
+
+    .displayNode {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 8px;
+        position: relative;
+        height: 46px;
+
+        img,
+        span,
+        button {
+            margin-right: 8px;
+        }
+
+        button {
+            display: none;
+        }
+
+        &:hover {
+            outline: 2px solid gray;
+            border-radius: 4px;
+
+            button {
+                display: block;
+            }
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            border-top: 1px solid gray;
+            left: -15px;
+            width: 15px;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            border-left: 1px solid gray;
+            left: -15px;
+            top: 0;
+            height: 100%;
+        }
+    }
+
+    .addNewNode {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 8px;
+
+        input {
+            border-radius: 4px;
+            padding: 6px;
+            margin: 0 8px;
+
+            &.required {
+                border-color: red;
+            }
+        }
+    }
+}
+
+.childNode {
+    margin-left: 24px;
+
+    app-file-folder {
+        &:last-child {
+            .displayNode {
+                &::after {
+                    height: 50%;
+                }
+            }
+        }
+
+        .childNode {
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                border-left: 1px solid gray;
+                left: -39px;
+                top: 0;
+                height: 100%;
+            }
+        }
+    }
+}

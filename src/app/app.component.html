@@ -1,0 +1,10 @@
+<div class="header">
+  <h1>File Folder Structure</h1>
+</div>
+
+<div id="content">
+  <button (click)="add()">Add root folder</button>
+  <app-file-folder *ngFor="let node of nodes" [currentNode]="node" (removeNode)="remove($event)"></app-file-folder>
+</div>
+
+<pre *ngIf="nodes.length > 0">{{nodes | json}}</pre>

@@ -1,0 +1,28 @@
+<div class="node">
+
+  <div *ngIf="currentNode?.type === 'unset'" class="nodeType">
+    <button class="small" (click)="currentNode.type = 'file'"> File</button>
+    <button class="small" (click)="currentNode.type = 'folder'"> Folder</button>
+  </div>
+
+  <div *ngIf="currentNode?.type !== 'unset' && currentNode?.name" class="displayNode">
+    <img
+      [src]="currentNode?.type === 'file' ? 'assets/resources/file-regular.svg' : 'assets/resources/folder-open-regular.svg'">
+    <span>{{currentNode?.name}}</span>
+    <button class="secondary small" (click)="addChild()" *ngIf="currentNode.type === 'folder'"> Add</button>
+    <button class="secondary small" (click)="remove()"> Remove</button>
+  </div>
+
+  <div *ngIf="currentNode?.type !== 'unset' && !currentNode?.name" class="addNewNode">
+    <img
+      [src]="currentNode?.type === 'file' ? 'assets/resources/file-regular.svg' : 'assets/resources/folder-open-regular.svg'">
+    <input [class.required]="name.invalid && name.touched" [formControl]="name">
+    <button class="secondary small" (click)="save()"> Save</button>
+    <button class="secondary small" (click)="remove()"> Cancel</button>
+  </div>
+</div>
+
+<div *ngIf="currentNode?.children?.length" class="childNode">
+  <app-file-folder *ngFor="let child of currentNode?.children" [currentNode]="child" (removeNode)="removeChild($event)">
+  </app-file-folder>
+</div>
